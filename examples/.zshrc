@@ -1,2 +1,2 @@
 # example .zshrc for enabling the cli
-source $HOME/.local/scripts/run.sh
+source $HOME/.local/scripts/entry.sh
