@@ -18,7 +18,7 @@ The system consists of three main components:
 4. Add the following line to your `.zshrc` file:
 
    ```bash
-   source $HOME/.local/scripts/entry.sh
+   source "$HOME/.local/scripts/entry.sh"
    ```
 
 ## Usage
@@ -37,7 +37,7 @@ Create your custom scripts in the `$HOME/.local/scripts/commands/` directory. Ea
 
 1. Have a `.sh` extension
 2. Be executable (`chmod +x script_name.sh`)
-3. Define a `module` function that accepts arguments
+3. Define `module` to export all runnable code
 
 Example:
 
@@ -45,8 +45,8 @@ Example:
 #!/bin/bash
 
 function module {
-	echo "Hello, World!"
-	echo "Arguments: $@"
+   echo "Hello, World!"
+   echo "Arguments: $@"
 }
 ```
 
