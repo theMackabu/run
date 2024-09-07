@@ -1,4 +1,4 @@
-export RUN_SCRIPTS_DIR="$HOME/.local/scripts"
+export RUN_SCRIPTS_DIR="$HOME/.local/scripts/commands"
 ALIAS_CONF="$HOME/.local/scripts/alias.conf"
 
 if [[ -f "$ALIAS_CONF" ]]; then
