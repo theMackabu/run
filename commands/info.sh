@@ -1,9 +1,8 @@
 function module {
-	local script_name="$2"
-	local script_path="$RUN_SCRIPTS_DIR/${script_name}.sh"
+	local script_path="$RUN_SCRIPTS_DIR/$2.sh"
 	
 	if [[ ! -f "$script_path" ]]; then
-		echo "Error: Script not found: $script_path" >&2
+		print -u2 "Error: Script not found: $script_path"
 		return 1
 	fi
 	

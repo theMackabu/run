@@ -5,9 +5,7 @@ ALIAS_CONF="$HOME/.local/scripts/alias.conf"
 
 if [ -n "$ZSH_VERSION" ]; then
 	typeset -A alias_list
-else
-	declare -A alias_list
-fi
+else declare -A alias_list; fi
 
 if [[ -f "$ALIAS_CONF" && -r "$ALIAS_CONF" ]]; then
 	alias_content=$(<"$ALIAS_CONF")
@@ -20,7 +18,6 @@ if [[ -f "$ALIAS_CONF" && -r "$ALIAS_CONF" ]]; then
 	done <<< "$alias_content"
 fi
 
-
 function run {    
 	local command_name="$1"
 	local script_name="${alias_list[$command_name]:-$command_name}"
@@ -29,14 +26,9 @@ function run {
 	if [[ -x "$script_path" ]]; then (
 		source "$script_path"
 		  
-		if declare -f module > /dev/null; then
-			module "$@"
-		else
-			echo "Error: module function not found in $script_path" >&2
+		if declare -f module > /dev/null; then module "$@"; else
+			print -u2  "Error: module function not found in $script_path"
 			return 1
 		fi 
-	) else
-		echo "Error: Script not found or not executable: $script_path" >&2
-		return 1
-	fi
+	) else print -u2 "Error: Script not found or not executable: $script_path"; return 1; fi
 }
