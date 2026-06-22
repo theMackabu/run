@@ -11,16 +11,12 @@ function module {
 	echo " - Path: $script_path"
 	echo " - Size: $(du -h "$script_path" | cut -f1)"
 	 
-	if [[ "$(uname)" == "Darwin" ]]; then
-		echo " - Last Modified: $(stat -f "%Sm" -t "%Y-%m-%d %H:%M:%S" "$script_path")"
-	else
+	if stat -c "%y" "$script_path" >/dev/null 2>&1; then
 		echo " - Last Modified: $(stat -c "%y" "$script_path")"
-	fi
-	 
-	if [[ "$(uname)" == "Darwin" ]]; then
-		echo " - Permissions: $(stat -f "%Sp" "$script_path")"
-	else
 		echo " - Permissions: $(stat -c "%A" "$script_path")"
+	else
+		echo " - Last Modified: $(stat -f "%Sm" -t "%Y-%m-%d %H:%M:%S" "$script_path")"
+		echo " - Permissions: $(stat -f "%Sp" "$script_path")"
 	fi
 	 
 	local message="To view the full script, use: run view $2"
